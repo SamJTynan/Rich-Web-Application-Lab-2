@@ -1,0 +1,39 @@
+div.bars {
+	
+  border: 5px solid #327da8;
+  background: #7494a6;
+  margin: auto;
+  width: 75%;
+  border-radius: 25px;
+  height: 100px;
+  
+}
+
+input { 
+	margin-right: 60px;
+	margin-bottom: 10px; 
+	margin-left: 60px; 
+	margin-top: 45px; 
+	
+	
+}
+table, td {
+  border: 1px solid black;
+  margin: auto;
+}
+
+div.error {
+	
+	margin: auto;
+	width: 30%;
+	
+}
+
+input.myinput
+{
+	
+	margin-left:557px;
+}
+
+
+	

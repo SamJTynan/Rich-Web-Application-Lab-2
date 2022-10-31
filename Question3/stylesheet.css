@@ -1,0 +1,53 @@
+ div.scroll {
+                margin:4px, 4px;
+                padding:4px;
+                float:right;
+                width: 370px;
+                height: 500px;
+				overflow-x: hidden;
+				overflow-y: auto;
+				background-color: #e3e3e3;
+                text-align:justify;
+				border-style: solid;
+				border-color: #425df5;
+				margin-right: 60px; 
+				border-radius: 25px;
+            }
+			
+
+div.userinfo {
+	
+	 float:left;
+	 border-style: solid;
+	 border-color: #425df5;
+	 background-color: #e3e3e3;
+	 margin-left: 60px; 
+	 height: 500px;
+	 width: 370px;
+	 border-radius: 25px;
+	
+}
+h5
+{
+	margin-left: 6px;
+	
+}
+img.userprof
+{
+	 width:280px;
+	 height:280px;
+	 display: block;
+	 margin: 0 auto;
+	 margin-top:15px;
+	 border-radius: 25px;
+	 
+	
+	
+}
+div.search{
+	
+	
+  margin: auto;
+  width: 20%;
+	
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+
+<div class = "search"><!-- Div for search bar --> 
+<form id = "form">
+  <input type="text" id="name" name="name" placeholder="Name" ><!-- Search bar --> 
+  <button type="button" onclick="myFunction()">Search</button>
+ </form>
+</div>
+<br>
+
+<div class = "userinfo"> <!-- Div for info about current accoutn -->
+<img src='' class ="userprof" id='userprof'> </img>
+<h5 id = "irlname"></h5> <!-- Fields for account info -->
+<h5 id = "username"></h5>
+<h5 id = "email"></h5>
+<h5 id = "location"></h5>
+<h5 id = "gits"></h5>
+</div>
+<div class = "scroll"> <div id="repo"> </div></div> <!-- Divs to display repos for current account -->
+<script>
+function myFunction() {
+  var name = document.getElementById('name').value; // Gets name from searchbar form
+  var user_url = 'https://api.github.com/users/' + name; //Adds to github request
+  
+  
+  fetch(user_url)
+  .then(response => response.json())
+  .then(data => {
+	var temp = JSON.stringify(data);
+    const obj = JSON.parse(temp);
+	document.getElementById("userprof").src = obj.avatar_url; //Assigns info to relevant fields
+	document.getElementById("irlname").innerHTML = "Name: " + obj.name;
+	document.getElementById("username").innerHTML = "Username: " + obj.login;
+	document.getElementById("email").innerHTML = "Email: " + obj.email;
+	document.getElementById("location").innerHTML = "Location: " + obj.location;
+	document.getElementById("gits").innerHTML = "Gits: " + obj.public_gists;
+	
+});
+
+user_url = user_url + '/repos'; //Adds to user url and gets their repos
+
+fetch(user_url)
+  .then(response => response.json())
+  .then(data => {
+	console.log(data);
+	
+	var temp = JSON.stringify(data);
+    const obj = JSON.parse(temp);
+	
+	for (let i = 0; i < obj.length; i++) { //Goes through every entry in object and gets repo name and description
+	
+	let html = '<div id = "git"><h2>' + obj[i].name + "<br>" + obj[i].description + '</h2></div>'; 
+	repo.insertAdjacentHTML("afterend", html); //Adds to repo div
+} 
+	
+	
+});
+}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<h1 style = "text-align:center"> Phone Directory </h1>
+<br>
+<div class="bars">
+
+<form id = "form"> <!-- For entering details into table -->
+  <input type="text" id="name" name="name" placeholder="Name" maxlength="20">
+  <input type="tel" id="phone" name="phone" placeholder="Mobile Number" maxlength = "10">
+  <input type="email" id="email" name="email" placeholder="Email" maxlength="40">
+  <button type="button" onclick="myFunction()">Submit</button>
+ </form>
+</div>
+<br>
+<br>
+<h1 style = "text-align:center"> Search </h1>
+
+<div><input type="text" class ="myinput" id="myInput" onkeyup="search()" placeholder="Search for numbers" title="Type in a number"><div> <!-- Div for error messages -->
+<div id="Nore" style="display:none"><p  style = "text-align:center;">No Results</p></div>
+<div id="Error" style="display:none"><p style = "text-align:center;"> Error please fill in all fields correctly</p></div> <!--Div for no results-->
+<div id="Table" class = "myTable">  <!-- Div for table -->
+<table id="myTable"> 
+<tr>
+    <th onclick="sortTable(0)">Name</th>
+    <th>Number</th>
+    <th>Email</th>
+  </tr>
+  
+</table>
+</table>
+
+</div>
+</div>
+
+<br>
+<script>
+function sortTable(n) { //For ascending and descending for the name coloumn 
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable");
+  switching = true;
+  dir = "asc"; 
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount ++;      
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+
+
+function myFunction() { //For adding values into table
+  var table = document.getElementById("myTable");
+  var name = document.getElementById('name').value;
+  var phone = document.getElementById('phone').value;
+  var email = document.getElementById('email').value;
+  var element = document.getElementById("Error");
+ 
+  var x =document.forms["form"]["phone"].value;
+  var y =document.forms["form"]["name"].value;
+  var regex=/^[a-zA-Z ]+$/;
+  
+
+  
+  if(!name || !phone || !email || isNaN(x)|| !y.match(regex) || phone.length != 10 )
+  {
+	element.style.display = "block";
+  }
+  
+  else{
+  var row = table.insertRow(1);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  var cell3 = row.insertCell(2);
+  document.getElementById("form").reset();
+  cell1.innerHTML = name;
+  cell2.innerHTML = phone;
+  cell3.innerHTML = email;
+  if( index % 2 == 1)
+  {
+	cell1.style.backgroundColor = "#f2f2f2";
+	cell2.style.backgroundColor = "#f2f2f2";
+	cell3.style.backgroundColor = "#f2f2f2";
+	}
+    
+  
+  
+  element.style.display = "none";
+
+  console.log(index);
+  }
+  
+  
+  
+}
+
+function search() { //For searchinf table
+  var element1 = document.getElementById("Nore");
+  var element2 = document.getElementById("Table");
+  var input, filter, table, tr, td, i, txtValue;
+  
+  var temp2 = document.getElementById('myTable').rows.length-1;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+		tr[i].style.display = "none";
+		
+      }
+    } 
+  
+}
+var temp1 = document.getElementById("myTable").querySelectorAll('[style="display: none;"]').length; 
+if(temp1 == temp2)
+  {
+	element1.style.display = "block";
+	element2.style.display = "none";
+	
+  } 
+  
+else
+{
+	element1.style.display = "none";
+	element2.style.display = "block";
+
+}
+  
+  
+}
+
+
+</script>
+</body>
+</html>
