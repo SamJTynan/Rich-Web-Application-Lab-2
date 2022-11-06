@@ -1,3 +1,3 @@
 fetch('https://jsonplaceholder.typicode.com/posts')
     .then(response => response.json())
-    .then(json => console.log(json.filter(p=>p.title.split("").length>6))) 
+    .then(json => console.log(json.filter(p=>p.title.split(" ").length>6)))
